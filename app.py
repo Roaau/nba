@@ -66,3 +66,17 @@ if equipos_seleccionados:
     st.pyplot(fig)
 else:
     st.warning("Por favor, selecciona al menos un equipo.")
+
+
+# Gráfica scatter: Relación entre altura y puntos por partido
+st.subheader("Relación entre Altura y Puntos por Partido")
+equipos_seleccionados_altura = st.multiselect("Selecciona los equipos a visualizar (Altura vs Puntos):", df["team_abbreviation"].unique())
+if equipos_seleccionados_altura:
+    df_filtrado_altura = df[df["team_abbreviation"].isin(equipos_seleccionados_altura)]
+    fig, ax = plt.subplots()
+    sns.scatterplot(x=df_filtrado_altura["player_height"], y=df_filtrado_altura["pts"], hue=df_filtrado_altura["team_abbreviation"], ax=ax)
+    ax.set_xlabel("Altura (cm)")
+    ax.set_ylabel("Puntos por Partido")
+    st.pyplot(fig)
+else:
+    st.warning("Por favor, selecciona al menos un equipo para visualizar la relación entre altura y puntos.")
